@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}
+Mahalliy habarlari
+{%endblock title%}
+{%block content%}
+<div class=" col-lg-8 col-md-8 col-sm-8  jumbotron " style="display: flex; width: 100%;">
+  <div class="left_content" style="width: 75%;">
+    <div class="single_post_content">
+      <h2><span>Mahalliy yangiliklari</span></h2>
+      <div class="single_post_content_left">
+
+        <ul class="business_catgnav  wow fadeInDown">
+           {%for local in local_news%}
+            {%if forloop.first%}
+              <li>
+                <figure class="bsbig_fig"> <a href="pages/single_page.html" class="featured_img"> <img alt="" src="{{local.image.url}}"> <span class="overlay"></span> </a>
+                  <figcaption> <a href="pages/single_page.html">{{local.title}}</a> </figcaption>
+                  <p>{{local.body | slice:100}}</p>
+                </figure>
+              </li>
+              {%endif%}
+          {%endfor%}
+        </ul>
+      </div>
+      <div class="single_post_content_right">
+        <ul class="spost_nav">
+          {%for local_right in  local_news%}
+            {%if forloop.counter > 1 %}
+              <li>
+                <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="{{local_right.image.url}}"> </a>
+                  <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> {{local_right.title | slice:50}}</a> </div>
+                </div>
+              </li>
+            {%endif%}
+          {%endfor%}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="single_sidebar" style="width: 20%;">
+    <h2><span>Mashhur habarlar</span></h2>
+    <ul class="spost_nav">
+      {%for last in last_news%}
+      <li>
+        <div class="media wow fadeInDown"> <a href="{%url 'list_detail' last.id%}" class="media-left"> <img alt="" src="{{last.image.url}}"> </a>
+          <div class="media-body"> <a href="{%url 'list_detail' last.id%}" class="catg_title" style="font-size: smaller;"> {{last.title}}</a> </div>
+        </div>
+      </li>
+      {%endfor%}
+
+    </ul>
+  </div>
+
+</div>
+{%endblock content%}

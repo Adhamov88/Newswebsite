@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class=" col-lg-8 col-md-8 col-sm-8  jumbotron " style="display: flex; width: 100%; font-family: sans-serif;">
+    <div class="left_content" style="width: 75%;">
+        <div class="card ">
+            <div class="card-body">
+              <h5 class="card-title" style="font-family: sans-serif; font-weight: bold;">{{list_detail.title}}</h5>
+            </div>
+            <img class="card-img-bottom" src="{{list_detail.image.url}}" alt="Card image cap">
+
+            <p class="card-text" style="width: 85%; font-size: medium; font-family: sans-serif; font-weight: 100;">{{list_detail.body }}</p>
+            <p class="card-text"><small class="text-muted">{{list_detail.upload_time}}</small></p>
+          </div>
+    </div>
+    <div class="single_sidebar" style="width: 20%;">
+      <h2><span>Mashhur habarlar</span></h2>
+      <ul class="spost_nav">
+        {%for last in last_news%}
+        <li>
+          <div class="media wow fadeInDown"> <a href="{%url 'list_detail' last.id%}" class="media-left"> <img alt="" src="{{last.image.url}}"> </a>
+            <div class="media-body"> <a href="{%url 'list_detail' last.id%}" class="catg_title" style="font-size: smaller;"> {{last.title}}</a> </div>
+          </div>
+        </li>
+        {%endfor%}
+
+      </ul>
+    </div>
+
+  </div>
+  {%endblock content%}

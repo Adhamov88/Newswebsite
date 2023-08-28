@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Assalomu alaykum</h1>
+{%for news in news_list%}
+<li><a href="{{ news.get_absolute_url }}">{{ news.title }}</a></li>
+{%endfor%}
+
+</body>
+</html>

@@ -30,23 +30,48 @@
   <header id="header">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="header_top">
+        <div class="header_top " style="display: flex; justify-content:space-between;">
           <div class="header_top_left">
             <ul class="top_nav">
               <li><a href="{%url 'index_view'%}">Home</a></li>
               <li><a href="{%url 'about'%}">About</a></li>
               <li><a href="{%url 'contact_view'%}">Contact</a></li>
+              {% if user.is_authenticated and user.is_superuser %}
+              <li><a href="{%url 'admin_page'%}">Admin</a></li>
+              {%endif%}
+
             </ul>
           </div>
-          <div class="header_top_right">
-            <p>{% now 'jS F Y H:i'%}</p>
+          <div class="header_top_right " style="width:55%; display: flex; justify-content:right; align-items: center;">
+            <p >{% now 'jS F Y H:i'%}</p>
+            <div class="border " style="border:1px solid #333 ;  height: 100%;"></div>
+            <div >
+
+            {%if request.user.is_authenticated%}
+            <a  style="color:#fff;" href="{% url 'profile' %}">My profile </a>
+            <a  style="color:#fff;" href="{% url 'logout' %}">Logged out </a>
+            {%else%}
+
+            <a  style="color:#fff;" href="{% url 'login' %}">Login </a>
+            <a  style="color:#fff;" href="{% url 'logout' %}">Logged out </a>
+            {%endif%}
+            </div>
           </div>
         </div>
       </div>
       <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="header_bottom">
-          <div class="logo_area"><a href="index.html" class="logo"><img src="{%static 'images/logo.jpg'%}" alt=""></a></div>
+        <div class="header_bottom" style="display: flex; justify-content: space-between; align-items:center;"  >
+          <div class="logo_area"><a href="{% url 'index_view'%}" class="logo"><img src="{%static 'images/logo.jpg'%}" alt=""></a></div>
+          <form action="{%url 'search_result'%}"method="get">
+            <div style="display: flex;">
+              <input class="form-control" id="floatingInput" placeholder="Search" name="q" style="border-right:none;">
+              <button type="submit" class="btn-primary">Search</button>
+            </div>
+
+            </form>
         </div>
+
+
       </div>
     </div>
   </header>

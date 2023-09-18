@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<h1>Foydalanuvchi malumotlarini o'zgartirish</h1>
+<form method="post" enctype="multipart/form-data">
+    <h3>Siz o'zingiz haqingizdagi malumotlarni o'zgartiring</h3>
+  {%csrf_token%}
+  {{user_form.as_p}}
+    {{profile_form.as_p}}
+    <button type="submit">O'zgarishlarni tasdiqlash</button>
+</form>
+{%endblock content%}

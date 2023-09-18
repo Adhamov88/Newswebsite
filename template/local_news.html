@@ -43,8 +43,8 @@ Mahalliy habarlari
     <ul class="spost_nav">
       {%for last in last_news%}
       <li>
-        <div class="media wow fadeInDown"> <a href="{%url 'list_detail' last.id%}" class="media-left"> <img alt="" src="{{last.image.url}}"> </a>
-          <div class="media-body"> <a href="{%url 'list_detail' last.id%}" class="catg_title" style="font-size: smaller;"> {{last.title}}</a> </div>
+        <div class="media wow fadeInDown"> <a href="{% url 'list_detail' last.id %}" class="media-left"> <img alt="" src="{{last.image.url}}"> </a>
+          <div class="media-body"> <a href="{% url 'list_detail' last.id %}" class="catg_title" style="font-size: smaller;"> {{last.title}}</a> </div>
         </div>
       </li>
       {%endfor%}

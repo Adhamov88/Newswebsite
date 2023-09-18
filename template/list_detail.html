@@ -1,19 +1,45 @@
 {%extends 'base.html'%}
 {%load static%}
+{%load hitcount_tags%}
 {%block content%}
+
+
 <div class=" col-lg-8 col-md-8 col-sm-8  jumbotron " style="display: flex; width: 100%; font-family: sans-serif;">
+
     <div class="left_content" style="width: 75%;">
         <div class="card ">
             <div class="card-body">
               <h5 class="card-title" style="font-family: sans-serif; font-weight: bold;">{{list_detail.title}}</h5>
             </div>
-            <img class="card-img-bottom" src="{{list_detail.image.url}}" alt="Card image cap">
+            <img class="card-img-bottom" style="width:80%;" src="{{ news.image.url }}" alt="Card image cap">
 
-            <p class="card-text" style="width: 85%; font-size: medium; font-family: sans-serif; font-weight: 100;">{{list_detail.body }}</p>
-            <p class="card-text"><small class="text-muted">{{list_detail.upload_time}}</small></p>
+            <p class="card-text" style="width: 85%; font-size: medium; font-family: sans-serif; font-weight: 100;">{{news.body }}</p>
+            <p class="card-text"><small class="text-muted">{{ news.upload_time }}</small><small class="text-muted "><img style="width:2%;" src="{%static 'images/eye-solid.svg'%}">{% get_hit_count for news%}</small></p>
           </div>
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+
+
+      <div class="toast-body">
+        Assalomu alaykum ,<br>
+          agar postni tahrirlamoqchi yoki o'chirmoqchi bo'lsangiz adminga aylaning
+          <br>
+        <div class="mt-2 pt-2 border-top">
+    <div class="mt-2 pt-2 border-top">
+
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+       <a href="{% url 'news_delete' news.slug %}" class="btn btn-danger">O'chirish</a>
+        <a href="{% url 'news_edit' news.slug %}" class="btn btn-primary">Tahrirlash</a>
+        <a href="{% url 'news_create' %}" class="btn btn-primary">Yangi yangilik qo'shish</a>
+
+    {% endif %}
+
     </div>
-    <div class="single_sidebar" style="width: 20%;">
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <div class="single_sidebar" style="width: 50%;">
       <h2><span>Mashhur habarlar</span></h2>
       <ul class="spost_nav">
         {%for last in last_news%}
@@ -24,8 +50,150 @@
         </li>
         {%endfor%}
 
+
       </ul>
+      <div class="single_sidebar">
+        <h2><span>Commentariyalar</span>Kommentlar soni: {{comment_count}}</h2>
+        <div style="width: 100%; display: flex ; flex-direction: column; justify-content: space-between;  height:auto;">
+
+
+        <ul>
+          {%for comment in comments%}
+
+              <li style="margin-top:2% ;">
+              <div class="row comments mb-2">
+              <div class="col-md-2 col-sm-2 col-3 text-center user-img">
+              <img id="profile-photo" src="//nicesnippets.com/demo/man01.png" class="rounded-circle" />
+              </div>
+              <div class="col-md-9 col-sm-9 col-9 comment rounded mb-2">
+              <h4 class="m-0"><a href="{%url 'profile'%}">{{user.username}}</a></h4>
+              <time class="text-white ml-3">{{comment.upload_time}}</time>
+              <like></like>
+              <p class="mb-0 text-white">{{comment.body}}</p>
+              </div>
+              </div>
+              </li>
+
+          {%endfor%}
+        </ul>
+      <form method="post">
+        {%csrf_token%}
+        <div class=" " style="display: flex; align-items: center; height: 10vh; justify-content: space-around;">
+        <div class="comment-box">
+        <input type="text" class="form-control" placeholder="comment ...."  name="body"/>
+        </div>
+        <button type="submit" class=" btn-danger">Send</button>
+        </div>
+        </div>
+      </form>
+
+        </div>
     </div>
+    <style>
+
+        body{
+            font-family: 'Raleway', sans-serif;
+            background: #E9ECE9;
+            }
+            .comments-main{
+            background: #FFF;
+            }
+            .comment time, .comment:hover time,.icon-rocknroll, .like-count {
+            -webkit-transition: .25s opacity linear;
+            transition: .25s opacity linear;
+            }
+            .comments-main ul li{
+            list-style: none;
+            }
+            .comments .comment {
+            padding: 5px 10px;
+            background: #00AF90;
+            }
+            .comments .comment:hover time{
+            opacity: 1;
+            }
+            .comments .user-img img {
+            width: 50px;
+            height: 50px;
+            }
+            .comments .comment h4 {
+            display: inline-block;
+            font-size: 16px;
+            }
+            .comments .comment h4 a {
+            color: #404040;
+            text-decoration: none;
+            }
+            .comments .comment .icon-rocknroll {
+            color: #545454;
+            font-size: .85rem;
+            }
+            .comments .comment .icon-rocknroll:hover {
+            opacity: .5;
+            }
+            .comments .comment time,.comments .comment .like-count,.comments .comment .icon-rocknroll {
+            font-size: .75rem;
+            opacity: 0;
+            }
+            .comments .comment time, .comments .comment .like-count {
+            font-weight: 300;
+            }
+            .comments .comment p {
+            font-size: 13px;
+            }
+            .comments .comment p .reply {
+            color: #BFBFA8;
+            cursor: pointer;
+            }
+            .comments .comment .active {
+            opacity: 1;
+            }
+            .icon-rocknroll {
+            background: none;
+            outline: none;
+            cursor: pointer;
+            margin: 0 .125rem 0 0;
+            }
+            .comments .comment:hover .icon-rocknroll,.comments .comment:hover .like-count {
+            opacity: 1;
+            }
+            .comment-box-main{
+            background: #CA1D5F;
+            }
+            @media (min-width: 320px) and (max-width: 480px){
+            .comments .comment h4 {
+            font-size: 12px;
+            }
+            .comments .comment p{
+            font-size: 11px;
+            }
+            .comment-box-main .send-btn button{
+            margin-left: 5px;
+            }
+            }
+    </style>
+    <script>
+        Vue.component('like', {
+            template: "<div class='like-data float-right text-white'><button class='icon-rocknroll mr-1 p-0 border-0' v-class='active: liked' v-on='click: toggleLike'><i class='fa fa-thumbs-up text-white' aria-hidden='true'></i></button><span class='like-count' v-class='active: liked'>{{ likesCount }}</span></div>",
+            data: function() {
+            return {
+            liked: false,
+            likesCount: 0
+            }
+            },
+            methods: {
+            toggleLike: function() {
+            this.liked = !this.liked;
+            this.liked ? this.likesCount++ : this.likesCount--;
+            }
+            }
+            });
+            new Vue({
+            el: '.comments-main',
+            });
+    </script>
+
 
   </div>
+
   {%endblock content%}

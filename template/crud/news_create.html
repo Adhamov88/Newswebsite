@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2 class="text-center">Yangilik qo'shish</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p> yangilikni qo'shmoqchimisiz</p>
+        <button type="submit" class="btn btn-primary">Qo'shish</button>
+    </form>
+    <script>
+      document.getElementById('id_title').addEventListener('input', function() {
+        var title = this.value.toLowerCase().trim(); // Get the value of the title field and convert it to lowercase
+        var slug = title.replace(/\s+/g, '-'); // Replace spaces with dashes
+        document.getElementById('id_slug').value = slug; // Set the value of the slug field
+      });
+    </script>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>Adminlar paneli</h1>
+
+<table class="table">
+    <tr>
+    <th>
+        Username
+    </th>
+    <th>
+        Ismi
+    </th>
+    </tr>
+    <tr>
+        {%for user in admin_users%}
+        <td>{{user.username}}</td>
+        <td>{{user.first_name}}</td>
+        {%endfor%}
+    </tr>
+</table>
+
+    <h2><a href="{%url 'news_create'%}">Yangilik qo'shish</a></h2>
+{%endblock content%}

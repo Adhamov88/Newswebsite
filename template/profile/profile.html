@@ -1,0 +1,155 @@
+{%extends 'base.html'%}
+
+{%load static%}
+{%block content%}
+
+<body>
+<div class="container">
+<div class="row">
+<div class="col-md-10 col-md-offset-1 col-md-1-offset profile-wrapper col-sm-12 col-xs-12">
+<div class="row">
+<div class="col-md-12 profile-back-img col-sm-12 col-xs-12">
+<img src="{%static 'images/fon.jpg' %}">
+</div>
+<div class="col-md-12 profile-name-area col-sm-12 col-xs-12">
+<div class="row">
+<div class="col-md-2 text-center user-pic col-sm-2 col-xs-12">
+<img src="{{profile.photo.url}}" alt="Bu yerga rasm qoymagansiz">
+</div>
+<div class="col-md-5 user-name col-sm-5 col-xs-12">
+<h2><strong><a href="#"><span style="color: #000;">Name: </span>{{user.first_name}}</a></strong></h2>
+<p><span style="color: #000;">Username: </span>{{user.username}}</p>
+</div>
+<div class="col-md-5 profile-btn-area col-sm-5 col-xs-12">
+<div class="pull-right">
+<a href="{%url 'user_edit'%}"><button class="edt-btn"><strong>EDIT PROFILE</strong></button></a>
+</div>
+<div class="dropdown pull-right">
+<button class="dropdown-toggle toogle-btn" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i>
+</button>
+<ul class="dropdown-menu pull-right">
+<li><a href="{%url 'logout'%}">Logout</a></li>
+<li><a href="{%url 'password_change'%}">Parolni almashtrish</a></li>
+<li><a href="{%url 'password_reset'%}">Parol esdan chiqtimi?</a></li>
+</ul>
+</div>
+<b><a href="{%url 'about'%}" class="abt-btn pull-right">ABOUT</a></b>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>
+    .profile-back-img{
+padding: 0;
+position: relative;
+}
+.profile-back-img img{
+width: 100%;
+}
+.profile-name-area{
+position: absolute;
+bottom:20px;
+}
+.user-pic img{
+border: 3px solid #fff;
+height: 70px;
+width: 70px;
+border-radius:50%;
+}
+.user-name{
+padding: 0;
+color: #fff;
+}
+.user-name h2{
+margin-top: 5px;
+}
+.user-name a{
+color: #fff;
+}
+.profile-btn-area{
+margin-top: 15px;
+}
+.abt-btn:hover,
+.abt-btn{
+border: none;
+border-radius: 2px;
+padding: 10px;
+color: #fff;
+margin-right: 20px;
+text-decoration: none;
+border:0;
+outline:none;
+}
+.abt-btn:focus{
+color: #fff;
+background:rgba(64, 108, 237,0.3);
+text-decoration:none;
+}
+.edt-btn{
+background: #fff;
+padding: 10px 15px;
+color: #000;
+border: none;
+border-radius:3px;
+margin: 0px 20px;
+}
+.toogle-btn{
+background: none;
+border: none;
+color: #fff;
+border-radius: 50%;
+height: 40px;
+width: 40px;
+}
+.toogle-btn:focus{
+background:rgba(250,250,250,0.2);
+}
+.toogle-btn i{
+padding-top: 3px;
+font-size: 20px;
+}
+@media screen and (max-width: 567px) {
+.profile-back-img img{
+height: 180px;
+}
+.dropdown,.abt-btn{
+display: none;
+}
+.profile-name-area{
+position: static;
+background: #F1F1F1;
+}
+.user-pic img{
+margin-top: -25px;
+height: 50px;
+width: 50px;
+}
+.user-name h3{
+text-align:center;
+margin-top: 30px;
+}
+.user-name h3 a{
+color: #000;
+}
+.user-name p{
+color: #000;
+text-align: center;
+}
+.profile-btn-area .edt-btn{
+margin-top:30px;
+margin-bottom:30px;
+text-align: center;
+background: #4285F4;
+color: #fff;
+}
+.profile-btn-area .pull-right{
+float: none !important;
+text-align: center;
+}
+}
+</style>
+</body>
+{%endblock content%}

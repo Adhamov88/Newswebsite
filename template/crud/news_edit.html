@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2 class="text-center">Joriy yangiliklarni tahrirlash</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>"{{ news.title | truncatewords:5 }}" sarlovhali yangilikni tahrirlamoqchimisz</p>
+        <button type="submit" class="btn btn-primary">Tahrirlash</button>
+    </form>
+{% endblock content %}

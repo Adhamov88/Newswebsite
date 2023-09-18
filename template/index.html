@@ -7,9 +7,9 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="slick_slider">
           {%for news in news_list%}
-          <div class="single_iteam"> <a href="{{ news.get_absolute_url }}"> <img src="{{news.image.url}}" alt=""></a>
+          <div class="single_iteam"> <a href="{{news.get_absolute_url }}"> <img src="{{news.image.url}}" alt=""></a>
             <div class="slider_article">
-              <h2><a class="slider_tittle" href="{{ news.get_absolute_url }}">{{news.title | slice:100}}</a></h2>
+              <h2><a class="slider_tittle" href="{{news.get_absolute_url}}">{{news.title | slice:100}}</a></h2>
               <p>{{news.body | slice:250}}</p>
             </div>
           </div>
@@ -25,7 +25,7 @@
             <ul class="latest_postnav">
                {%for news in news_list%}
               <li>
-                <div class="media"> <a href="{%url 'list_detail' news.pk%}" class="media-left"> <img alt="" src="{{news.image.url}}"> </a>
+                <div class="media"> <a href="{{ news.get_absolute_url }}" class="media-left"> <img alt="" src="{{news.image.url}}"> </a>
                   <div class="media-body"> <a href="{%url 'list_detail' news.pk%}" class="catg_title">{{news.title | slice:100}}</a> </div>
                 </div>
               </li>

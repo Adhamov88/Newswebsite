@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <h2 class="text-center">Joriy yangiliklarni o'chirish</h2>
+    <form method="post">
+        {%csrf_token%}
+        <p>{{news.title | truncatewords:3}} ... sarlovhali yangilikni o'chirmoqchimisz</p>
+        <button type="submit" class="btn btn-danger">Tasdiqlayman</button>
+    </form>
+{%endblock content%}
